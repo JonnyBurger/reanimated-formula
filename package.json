@@ -4,13 +4,15 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "prepare": "npm-install-peers"
+    "prepare": "npx npm-install-peers"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "simple-math-ast": "^1.0.0"
+  },
+  "devDependencies": {
     "npm-install-peers": "^1.2.1",
-    "simple-math-ast": "^1.0.0",
     "typescript": "^3.4.1"
   },
   "peerDependencies": {

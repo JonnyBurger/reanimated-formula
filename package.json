@@ -4,12 +4,12 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "npm-install-peers"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "react-native-reanimated": "^1.0.0-alpha.12",
+    "npm-install-peers": "^1.2.1",
     "simple-math-ast": "^1.0.0",
     "typescript": "^3.4.1"
   },

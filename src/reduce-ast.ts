@@ -1,3 +1,5 @@
+import {AstNode} from './types';
+
 export type Variables = {
 	[key: string]: any;
 };

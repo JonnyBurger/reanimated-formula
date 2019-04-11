@@ -3,8 +3,7 @@ import build from './simple-math-ast';
 import Animated from 'react-native-reanimated';
 import {InvalidExpressionError} from './InvalidExpressionError';
 import ASTNode from './simple-math-ast/parse/node';
-
-const packageJson = require('../package.json');
+import logPrefix from './log-prefix';
 
 type Placeholder = number | Animated.Value<number | string | boolean>;
 
@@ -50,7 +49,7 @@ const validateArgs = (placeholders: Placeholder[]) => {
 			].some(f => f(placeholder))
 		) {
 			throw new TypeError(
-				`[${packageJson.name}]: ${JSON.stringify(
+				`${logPrefix} ${JSON.stringify(
 					placeholder
 				)} was passed as a value but only numbers and Animated.Value's are accepted.`
 			);
@@ -81,7 +80,7 @@ const reanimatedFormula = (
 	} catch (err) {
 		if (err.name === 'InvalidExpressionError') {
 			throw new InvalidExpressionError(
-				`[${packageJson.name}]: Expression ${
+				`${logPrefix} Expression ${
 					argArray.length > 0
 						? argArray.join('<variable>')
 						: placeholders.join(',')

@@ -4,8 +4,6 @@ import ASTNode from './simple-math-ast/parse/node';
 import TokenType from './simple-math-ast/types';
 import logPrefix from './log-prefix';
 
-const packageJson = require('../package.json');
-
 export type Variables = {
 	[key: string]: any;
 };

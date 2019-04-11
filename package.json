@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
+  "main": "dist/commonjs/index.js",
+  "module": "dist/module/index.js",
+  "react-native": "src/index.js",
+  "types": "dist/typescript/index.d.ts",
   "scripts": {
-    "prepare": "npx npm-install-peers",
+    "prepare": "npx npm-install-peers && bob build",
     "test": "tsc && ava test",
     "postinstall": "npm run prepare"
   },
@@ -14,6 +18,7 @@
     "ramda": "^0.26.1"
   },
   "devDependencies": {
+    "@react-native-community/bob": "^0.3.3",
     "@types/mockery": "^1.4.29",
     "@types/node": "^11.13.4",
     "@types/ramda": "^0.26.6",
@@ -36,6 +41,15 @@
       "ts-node/register",
       "@babel/register",
       "./dist/_mocks.js"
+    ]
+  },
+  "@react-native-community/bob": {
+    "source": "src",
+    "output": "dist",
+    "targets": [
+      ["commonjs", {"flow": true}],
+      "module",
+      "typescript"
     ]
   }
 }

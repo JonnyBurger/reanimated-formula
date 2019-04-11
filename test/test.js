@@ -113,6 +113,30 @@ test('Should support max()', t => {
 	t.is(formula`max(${2}, 5)`.__value, 5);
 });
 
+test('Should support single number', t => {
+	t.is(formula`2`, 2);
+});
+
+test('Should support PI and other constants', t => {
+	t.is(formula`pi + 2`.__value, Math.PI + 2);
+});
+
+test('Weird stuff', t => {
+	t.throws(() => formula`@`, /Expression @ could not be parsed/);
+});
+
+test('Should handle function with no arguments', t => {
+	t.throws(() => formula`sin()`);
+	t.throws(() => formula`cos()`);
+	t.throws(() => formula`tan()`);
+	t.throws(() => formula`min()`);
+	t.throws(() => formula`max(0)`);
+	t.throws(() => formula`max(1)`);
+	t.is(formula`max(2,1)`.__value, 2);
+});
+
+test('Weird spacing', t => {
+	t.is(formula`2                     +                     1`.__value, 3);
+});
+
 test.todo('Should support ternary');
-test.todo('Should support PI and other constants');
-test.todo('Should handle function with no arguments');

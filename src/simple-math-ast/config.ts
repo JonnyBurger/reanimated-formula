@@ -23,7 +23,7 @@ const config: {rules: RuleWrapper[]} = {
 			}
 		},
 		{
-			key: 'PI|E|pi|e',
+			key: 'PI|pi',
 			data: {
 				type: TokenType.CONSTANT
 			}

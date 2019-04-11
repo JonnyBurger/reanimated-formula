@@ -23,6 +23,11 @@ const reduceAst = (
 	if (tree.token.type === TokenType.NUMBER) {
 		return Number(tree.token.value);
 	}
+	if (tree.token.type === TokenType.CONSTANT) {
+		if (tree.token.value === 'pi' || tree.token.value === 'PI') {
+			return Math.PI;
+		}
+	}
 	if (tree.token.type === TokenType.VARIABLE) {
 		return variables[tree.token.value as string];
 	}

@@ -1,6 +1,6 @@
 {
   "name": "reanimated-formula",
-  "version": "1.0.0",
+  "version": "0.2.0-alpha.1",
   "description": "",
   "main": "dist/commonjs/index.js",
   "module": "dist/module/index.js",
@@ -8,8 +8,7 @@
   "types": "dist/typescript/index.d.ts",
   "scripts": {
     "prepare": "npx npm-install-peers && bob build",
-    "test": "tsc && ava test",
-    "postinstall": "npm run prepare"
+    "test": "tsc && ava test"
   },
   "author": "",
   "license": "ISC",

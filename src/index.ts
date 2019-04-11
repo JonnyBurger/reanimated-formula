@@ -62,8 +62,10 @@ export const nativeFormula = (
 	args: TemplateStringsArray,
 	...placeholders: number[]
 ) => {
+	const argArray = args || [];
+
 	validateArgs(placeholders);
-	const [ast, variables] = makeAst(args, ...placeholders);
+	const [ast, variables] = makeAst(argArray, ...placeholders);
 	return reduceAst(ast, variables, 'native');
 };
 
@@ -71,9 +73,10 @@ const reanimatedFormula = (
 	args: TemplateStringsArray,
 	...placeholders: Placeholder[]
 ) => {
+	const argArray = args || [];
 	validateArgs(placeholders);
 	try {
-		const [ast, variables] = makeAst(args, ...placeholders);
+		const [ast, variables] = makeAst(argArray, ...placeholders);
 		return reduceAst(ast, variables, 'reanimated');
 	} catch (err) {
 		if (err.name === 'InvalidExpressionError') {

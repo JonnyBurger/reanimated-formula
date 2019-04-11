@@ -109,5 +109,4 @@ test.todo('Should support max()');
 test.todo('Should support array for ()');
 test.todo('Should support ternary');
 test.todo('Should support PI and other constants');
-test.todo('Should support ^ operator');
 test.todo('Should handle function with no arguments');

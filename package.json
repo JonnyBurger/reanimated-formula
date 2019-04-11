@@ -1,11 +1,10 @@
 {
-  "name": "lit-reanimated",
+  "name": "reanimated-formula",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "compile-reanimated": "npx babel node_modules/react-native-reanimated --presets=module:metro-react-native-babel-preset --out-dir=dist/react-native-reanimated",
-    "prepare": "npx npm-install-peers && npm run compile-reanimated",
+    "prepare": "npx npm-install-peers",
     "test": "tsc && ava test",
     "postinstall": "npm run prepare"
   },
@@ -15,14 +14,10 @@
     "ramda": "^0.26.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.3",
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/register": "^7.4.0",
     "@types/mockery": "^1.4.29",
     "@types/node": "^11.13.4",
     "@types/ramda": "^0.26.6",
     "ava": "^1.4.1",
-    "metro-react-native-babel-preset": "^0.53.1",
     "mockery": "^2.1.0",
     "npm-install-peers": "^1.2.1",
     "ts-node": "^8.0.3",
@@ -34,15 +29,6 @@
     "react-native-reanimated": "*"
   },
   "ava": {
-    "babel": {
-      "testOptions": {
-        "presets": [
-          [
-            "module:metro-react-native-babel-preset"
-          ]
-        ]
-      }
-    },
     "extensions": [
       "ts"
     ],

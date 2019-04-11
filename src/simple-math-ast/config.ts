@@ -9,7 +9,7 @@ export type Rule = {
 };
 
 export type Token = Rule & {
-	value: number | string;
+	value: number | string | (number | string)[];
 };
 
 const config: {rules: RuleWrapper[]} = {

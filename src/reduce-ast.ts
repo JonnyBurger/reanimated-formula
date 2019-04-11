@@ -21,11 +21,9 @@ const reduceAst = (
 		return Number(tree.token.value);
 	}
 	if (tree.token.type === TokenType.VARIABLE) {
-		if (!variables[tree.token.value]) {
-			throw new TypeError(`Could not find variable ${tree.token.value}`);
-		}
-		return variables[tree.token.value];
+		return variables[tree.token.value as string];
 	}
+
 	const left = reduceAst(tree.left as ASTNode, variables, mathType);
 	if (tree.token.type === TokenType.NAMED_FUNCTION) {
 		if (tree.token.value === 'log') {

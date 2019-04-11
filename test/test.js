@@ -1,10 +1,11 @@
 import test from 'ava';
 import build from 'simple-math-ast';
-import {nativeFormula} from '../dist';
+import formula, {nativeFormula} from '../dist';
 import reduceAst from '../dist/reduce-ast';
+import Animated from 'react-native-reanimated';
 
 test('Simple arithmetic addition', t => {
-	const value = reduceAst(build('2 + 2'), {});
+	const value = reduceAst(build('2 + 2'), {}, 'native');
 	t.is(value, 4);
 });
 
@@ -25,4 +26,12 @@ test('Should do Multiplication before addition', t => {
 	t.is(nativeFormula`${x} + ${y} * ${z}`, 25);
 	t.is(nativeFormula`${x} + (${y} * ${z})`, 25);
 	t.is(nativeFormula`(${x} + ${y}) * ${z}`, 70);
+});
+
+test('AnimatedValue Formula', t => {
+	const a = new Animated.Value(1);
+	const b = new Animated.Value(1);
+	const added = formula`${a} + ${b}`;
+	// @ts-ignore
+	t.is(added.__value, 2);
 });

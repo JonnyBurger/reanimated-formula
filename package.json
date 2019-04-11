@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/mockery": "^1.4.29",
+    "mockery": "^2.1.0",
     "simple-math-ast": "^1.0.0"
   },
   "devDependencies": {
@@ -39,8 +41,13 @@
         ]
       }
     },
+    "extensions": [
+      "ts"
+    ],
     "require": [
-      "@babel/register"
+      "ts-node/register",
+      "@babel/register",
+      "./dist/_mocks.js"
     ]
   },
   "jest": {

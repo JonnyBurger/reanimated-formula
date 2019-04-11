@@ -12,6 +12,7 @@ import {
 
 import ASTNode from './node';
 import {Token} from '../config';
+import {Variables} from 'src/reduce-ast';
 
 const addOperandNode = (nodes: ASTNode[], token: Token) => {
 	const node = new ASTNode(token);
@@ -30,11 +31,14 @@ const addOperatorNode = (nodes: ASTNode[], token: Token) => {
 	nodes.push(node);
 };
 
-const parse = (tokens: Token[]) => {
+const parse = (tokens: Token[], variables: Variables) => {
 	const ops: Token[] = [];
 	const nodes: ASTNode[] = [];
 
 	forEach(token => {
+		if (isVariable(token) && !variables[token.value as string]) {
+			throw new TypeError(`Could not find variable ${token.value}`);
+		}
 		if (isNumber(token) || isVariable(token) || isConstant(token)) {
 			addOperandNode(nodes, token);
 		}

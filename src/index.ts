@@ -31,7 +31,7 @@ const makeAst = (
 		}
 		intersect = intersect.filter(Boolean);
 	}
-	const ast = build(intersect.join(''));
+	const ast = build(intersect.join(''), variables);
 	return [ast, variables];
 };
 

@@ -3,13 +3,17 @@ import build from 'simple-math-ast';
 import Animated from 'react-native-reanimated';
 import {AstNode} from './types';
 
+const packageJson = require('../package.json');
+
+type Placeholder = number | Animated.Value<number | string | boolean>;
+
 const makeAst = (
 	args: TemplateStringsArray,
-	...placeholder: (number | Animated.Value<number | string | boolean>)[]
+	...placeholder: Placeholder[]
 ): [AstNode, Variables] => {
 	let variableMap = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	if (args.length > variableMap.length) {
-		throw new Error(
+		throw new TypeError(
 			`Not more than ${
 				variableMap.length
 			} variables are supported per expression.`
@@ -30,19 +34,39 @@ const makeAst = (
 	return [ast, variables];
 };
 
+const validateArgs = (placeholders: Placeholder[]) => {
+	for (let placeholder of placeholders) {
+		if (
+			![
+				(p: unknown) => p instanceof Animated.Node,
+				(p: unknown) => typeof p === 'number',
+				(p: unknown) => p instanceof Animated.Value
+			].some(f => f(placeholder))
+		) {
+			throw new TypeError(
+				`[${packageJson.name}]: ${JSON.stringify(
+					placeholder
+				)} was passed as a value but only numbers and Animated.Value's are accepted.`
+			);
+		}
+	}
+};
+
 export const nativeFormula = (
 	args: TemplateStringsArray,
-	...placeholder: number[]
+	...placeholders: number[]
 ) => {
-	const [ast, variables] = makeAst(args, ...placeholder);
+	validateArgs(placeholders);
+	const [ast, variables] = makeAst(args, ...placeholders);
 	return reduceAst(ast, variables, 'native');
 };
 
 const reanimatedFormula = (
 	args: TemplateStringsArray,
-	...placeholder: (number | Animated.Value<number | string | boolean>)[]
+	...placeholders: Placeholder[]
 ) => {
-	const [ast, variables] = makeAst(args, ...placeholder);
+	validateArgs(placeholders);
+	const [ast, variables] = makeAst(args, ...placeholders);
 	return reduceAst(ast, variables, 'reanimated');
 };
 

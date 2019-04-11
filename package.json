@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/mockery": "^1.4.29",
+    "@types/node": "^11.13.4",
     "mockery": "^2.1.0",
     "simple-math-ast": "^1.0.0"
   },

@@ -1,5 +1,6 @@
 import {AstNode} from './types';
 import Animated from 'react-native-reanimated';
+const packageJson = require('../package.json');
 
 export type Variables = {
 	[key: string]: any;
@@ -12,6 +13,11 @@ const reduceAst = (
 	variables: Variables,
 	mathType: MathType
 ): number | Animated.Node<number> => {
+	if (!tree) {
+		throw new TypeError(
+			`[${packageJson.name}]: Expression could not be parsed.`
+		);
+	}
 	if (tree.token.type === 'NUMBER') {
 		return Number(tree.token.value);
 	}

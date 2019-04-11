@@ -28,10 +28,25 @@ test('Should do Multiplication before addition', t => {
 	t.is(nativeFormula`(${x} + ${y}) * ${z}`, 70);
 });
 
-test('AnimatedValue Formula', t => {
+test('Animated.Value addition', t => {
 	const a = new Animated.Value(1);
 	const b = new Animated.Value(1);
 	const added = formula`${a} + ${b}`;
 	// @ts-ignore
 	t.is(added.__value, 2);
+});
+
+test('Should reject string placeholders', t => {
+	const a = {a: 'invalid'};
+	t.throws(() => formula`${a} + 1`, /was passed as a value/);
+});
+
+test('Mixed Animated.Value and raw numbers', t => {
+	const a = 1;
+	const b = new Animated.Value(2);
+	t.is(formula`${a}+${2}`.__value, 3);
+});
+
+test('Invalid math should throw', t => {
+	t.throws(() => formula`1++2`);
 });

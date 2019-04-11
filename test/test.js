@@ -32,7 +32,6 @@ test('Animated.Value addition', t => {
 	const a = new Animated.Value(1);
 	const b = new Animated.Value(1);
 	const added = formula`${a} + ${b}`;
-	// @ts-ignore
 	t.is(added.__value, 2);
 });
 
@@ -52,6 +51,7 @@ test('Mixed Animated.Value and raw numbers', t => {
 test('Invalid math should throw', t => {
 	const a = 1;
 	t.throws(() => formula`1++2`, /Expression 1\+\+2 could not be parsed/);
+	t.throws(() => formula`1+`, /Expression 1\+ could not be parsed/);
 	t.throws(
 		() => formula`${a}++2`,
 		/Expression <variable>\+\+2 could not be parsed/
@@ -80,12 +80,27 @@ test('Should do square root', t => {
 
 test('Should throw on unsupported function', t => {
 	t.throws(() => formula`randomfunction()`);
+	t.throws(() => formula`randomfunction(2)`);
+	t.throws(() => formula`randomfunction(2, 2)`);
 });
 
 test('Should throw on unrecognized variable', t => {
 	const a = 2;
 	t.throws(() => formula`${a} + x`);
 });
+
+test('Should throw when passing in an array unfittingly', t => {
+	t.throws(() => formula`${[2, 2]} + 2`);
+	t.throws(() => formula`sin(${[2, 2]})`);
+	t.throws(() => formula`cos(${[2, 2]})`);
+	t.throws(() => formula`tan(${[2, 2]})`);
+	t.throws(() => formula`(${[2, 2]} - 2)`);
+	t.throws(() => formula`(${[2, 2]} / 2)`);
+	t.throws(() => formula`(${[2, 2]} * 2)`);
+});
+
+test('Should support min()', t => {
+	t.is(formula`min(${[2, 5]})`, 2);
 });
 test.todo('Should throw on unrecognized variable');
 test.todo('Should support min()');

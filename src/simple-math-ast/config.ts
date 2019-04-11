@@ -37,6 +37,22 @@ const config: {rules: RuleWrapper[]} = {
 			}
 		},
 		{
+			key: '\\|\\|',
+			data: {
+				type: TokenType.OPERATOR,
+				args: 2,
+				precedence: 2
+			}
+		},
+		{
+			key: '\\&\\&',
+			data: {
+				type: TokenType.OPERATOR,
+				args: 2,
+				precedence: 2
+			}
+		},
+		{
 			key: '[\\*\\/]',
 			data: {
 				type: TokenType.OPERATOR,

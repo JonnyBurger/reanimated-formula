@@ -39,5 +39,9 @@ mockery.registerMock('react-native-reanimated', {
 		new AnimatedValue(a.reduce(
 			(b, c, index) => (index > 0 ? Math.pow(getValue(b), getValue(c)) : c),
 			0
-		) as number)
+		) as number),
+	and: (a: SingleValue, b: SingleValue) =>
+		new AnimatedValue(getValue(a) && getValue(b)),
+	or: (a: SingleValue, b: SingleValue) =>
+		new AnimatedValue(getValue(a) || getValue(b))
 });

@@ -196,6 +196,30 @@ const reduceAst = (
 
 		return (left as number) * (right as number);
 	}
+	if (tree.token.value === '||') {
+		if (Array.isArray(left) || Array.isArray(right)) {
+			throw new InvalidExpressionError(
+				`${logPrefix} Cannot use operator "||" on array`
+			);
+		}
+		if (mathType === 'reanimated') {
+			return Animated.or(left, right);
+		}
+
+		return (left as number) || (right as number);
+	}
+	if (tree.token.value === '&&') {
+		if (Array.isArray(left) || Array.isArray(right)) {
+			throw new InvalidExpressionError(
+				`${logPrefix} Cannot use operator "&&" on array`
+			);
+		}
+		if (mathType === 'reanimated') {
+			return Animated.and(left, right);
+		}
+
+		return (left as number) && (right as number);
+	}
 	if (tree.token.value === ',') {
 		return [
 			...(Array.isArray(left) ? left : [left]),

@@ -147,6 +147,12 @@ test('Should support **', t => {
 	t.is(formula`pow(${[2, 2, new Animated.Value(2)]})`.__value, 16);
 });
 
+test('Should support and / or', t => {
+	t.is(formula`1 && 0`.__value, 0);
+	t.is(formula`1 || 0`.__value, 1);
+	t.is(formula`0 || 0 || 22`.__value, 22);
+});
+
 test.todo('Should support ternary');
 test.todo('Should support modulo');
 test.todo('Should support acos');
@@ -162,8 +168,6 @@ test.todo('Should support greaterThan');
 test.todo('Should support lessOrEq');
 test.todo('Should support greaterOrEq');
 test.todo('Should support neq');
-test.todo('Should support and');
-test.todo('Should support or');
 test.todo('Should support defined');
 test.todo('Should support not');
 test.todo('Should support abs');

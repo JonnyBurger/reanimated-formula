@@ -17,13 +17,12 @@ const reduceAst = (
 	if (!tree) {
 		throw new InvalidExpressionError('Could not parse');
 	}
-	console.log(tree);
 	if (tree.token.type === TokenType.NUMBER) {
 		return Number(tree.token.value);
 	}
 	if (tree.token.type === TokenType.VARIABLE) {
 		if (!variables[tree.token.value]) {
-			throw new Error(`Could not find variable ${tree.token.value}`);
+			throw new TypeError(`Could not find variable ${tree.token.value}`);
 		}
 		return variables[tree.token.value];
 	}

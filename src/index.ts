@@ -77,6 +77,8 @@ const reanimatedFormula = (
 					'<variable>'
 				)} could not be parsed`
 			);
+		} else {
+			throw err;
 		}
 	}
 };

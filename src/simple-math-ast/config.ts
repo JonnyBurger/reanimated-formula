@@ -15,7 +15,7 @@ export type Token = Rule & {
 const config: {rules: RuleWrapper[]} = {
 	rules: [
 		{
-			key: 'sin|cos|tan|cot|log|sqrt',
+			key: 'sin|cos|tan|cot|log|sqrt|min|max',
 			data: {
 				type: TokenType.NAMED_FUNCTION,
 				args: 1,

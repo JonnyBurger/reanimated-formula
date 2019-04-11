@@ -100,13 +100,19 @@ test('Should throw when passing in an array unfittingly', t => {
 });
 
 test('Should support min()', t => {
-	t.is(formula`min(${[2, 5]})`, 2);
+	t.is(formula`min(${[2, 5]})`.__value, 2);
+	t.is(formula`min(${[2, 5, 0, 1]})`.__value, 0);
+	t.is(formula`min(2, 5)`.__value, 2);
+	t.is(formula`min(${2}, 5)`.__value, 2);
 });
-test.todo('Should throw on unrecognized variable');
-test.todo('Should support min()');
-test.todo('Should support array for min()');
-test.todo('Should support max()');
-test.todo('Should support array for ()');
+
+test('Should support max()', t => {
+	t.is(formula`max(${[2, 5]})`.__value, 5);
+	t.is(formula`max(${[2, 8, 0, 1]})`.__value, 8);
+	t.is(formula`max(2, 7)`.__value, 7);
+	t.is(formula`max(${2}, 5)`.__value, 5);
+});
+
 test.todo('Should support ternary');
 test.todo('Should support PI and other constants');
 test.todo('Should handle function with no arguments');

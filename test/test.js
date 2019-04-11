@@ -48,5 +48,24 @@ test('Mixed Animated.Value and raw numbers', t => {
 });
 
 test('Invalid math should throw', t => {
-	t.throws(() => formula`1++2`);
+	const a = 1;
+	t.throws(() => formula`1++2`, /Expression 1\+\+2 could not be parsed/);
+	t.throws(
+		() => formula`${a}++2`,
+		/Expression <variable>\+\+2 could not be parsed/
+	);
+});
+
+test('Should do sin() function', t => {
+	const a = 0.5;
+	t.is(formula`sin(${a})`.__value, Math.sin(0.5));
+	t.throws(() => formula`sin(a++1)`);
+});
+
+test('Should do geometric functions', t => {
+	const a = 0.5;
+	t.is(
+		formula`cos(${a}) + sin(${a}) + tg(${a})`.__value,
+		Math.cos(a) + Math.sin(a) + Math.tan(a)
+	);
 });

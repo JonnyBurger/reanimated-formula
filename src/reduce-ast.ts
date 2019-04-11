@@ -1,5 +1,6 @@
 import {AstNode} from './types';
 import Animated from 'react-native-reanimated';
+import {InvalidExpressionError} from './InvalidExpressionError';
 const packageJson = require('../package.json');
 
 export type Variables = {
@@ -14,9 +15,7 @@ const reduceAst = (
 	mathType: MathType
 ): number | Animated.Node<number> => {
 	if (!tree) {
-		throw new TypeError(
-			`[${packageJson.name}]: Expression could not be parsed.`
-		);
+		throw new InvalidExpressionError('Could not parse');
 	}
 	if (tree.token.type === 'NUMBER') {
 		return Number(tree.token.value);
@@ -28,7 +27,6 @@ const reduceAst = (
 		return variables[tree.token.value];
 	}
 	const left = reduceAst(tree.left as AstNode, variables, mathType);
-	const right = reduceAst(tree.right as AstNode, variables, mathType);
 	if (tree.token.type === 'NAMED_FUNCTION') {
 		if (tree.token.value === 'log') {
 			if (mathType === 'reanimated') {
@@ -67,6 +65,7 @@ const reduceAst = (
 			return Math.sqrt(left as number);
 		}
 	}
+	const right = reduceAst(tree.right as AstNode, variables, mathType);
 	if (tree.token.value === '+') {
 		if (mathType === 'reanimated') {
 			return Animated.add(left, right);

@@ -2,6 +2,7 @@ import reduceAst, {Variables} from './reduce-ast';
 import build from 'simple-math-ast';
 import Animated from 'react-native-reanimated';
 import {AstNode} from './types';
+import {InvalidExpressionError} from './InvalidExpressionError';
 
 const packageJson = require('../package.json');
 
@@ -66,8 +67,18 @@ const reanimatedFormula = (
 	...placeholders: Placeholder[]
 ) => {
 	validateArgs(placeholders);
-	const [ast, variables] = makeAst(args, ...placeholders);
-	return reduceAst(ast, variables, 'reanimated');
+	try {
+		const [ast, variables] = makeAst(args, ...placeholders);
+		return reduceAst(ast, variables, 'reanimated');
+	} catch (err) {
+		if (err.name === 'InvalidExpressionError') {
+			throw new InvalidExpressionError(
+				`[${packageJson.name}]: Expression ${args.join(
+					'<variable>'
+				)} could not be parsed`
+			);
+		}
+	}
 };
 
 export default reanimatedFormula;

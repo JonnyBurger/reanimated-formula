@@ -23,5 +23,6 @@ mockery.registerMock('react-native-reanimated', {
 	multiply: (a: Value, b: Value) =>
 		new AnimatedValue(getValue(a) * getValue(b)),
 	sin: (a: Value) => new AnimatedValue(Math.sin(getValue(a))),
-	tan: (a: Value) => new AnimatedValue(Math.tan(getValue(a)))
+	tan: (a: Value) => new AnimatedValue(Math.tan(getValue(a))),
+	cos: (a: Value) => new AnimatedValue(Math.cos(getValue(a)))
 });

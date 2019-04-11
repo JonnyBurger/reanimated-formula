@@ -78,9 +78,11 @@ const reanimatedFormula = (
 	} catch (err) {
 		if (err.name === 'InvalidExpressionError') {
 			throw new InvalidExpressionError(
-				`[${packageJson.name}]: Expression ${args.join(
-					'<variable>'
-				)} could not be parsed`
+				`[${packageJson.name}]: Expression ${
+					argArray.length > 0
+						? argArray.join('<variable>')
+						: placeholders.join(',')
+				} could not be parsed`
 			);
 		} else {
 			throw err;

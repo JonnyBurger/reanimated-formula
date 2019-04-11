@@ -39,6 +39,8 @@ test('Animated.Value addition', t => {
 test('Should reject string placeholders', t => {
 	const a = {a: 'invalid'};
 	t.throws(() => formula`${a} + 1`, /was passed as a value/);
+	const b = '2';
+	t.throws(() => formula`${b} + 1`, /was passed as a value/);
 });
 
 test('Mixed Animated.Value and raw numbers', t => {
@@ -76,8 +78,14 @@ test('Should do square root', t => {
 	t.is(formula`sqrt(4)`.__value, 2);
 });
 
-test.only('Should throw on unsupported function', t => {
-	t.is(formula`randomfunction()`.__value, 1);
+test('Should throw on unsupported function', t => {
+	t.throws(() => formula`randomfunction()`);
+});
+
+test('Should throw on unrecognized variable', t => {
+	const a = 2;
+	t.throws(() => formula`${a} + x`);
+});
 });
 test.todo('Should throw on unrecognized variable');
 test.todo('Should support min()');

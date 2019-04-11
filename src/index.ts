@@ -36,12 +36,17 @@ const makeAst = (
 };
 
 const validateArgs = (placeholders: Placeholder[]) => {
+	const check = [
+		(p: unknown) => p instanceof Animated.Node,
+		(p: unknown) => typeof p === 'number',
+		(p: unknown) => p instanceof Animated.Value
+	];
 	for (let placeholder of placeholders) {
 		if (
 			![
-				(p: unknown) => p instanceof Animated.Node,
-				(p: unknown) => typeof p === 'number',
-				(p: unknown) => p instanceof Animated.Value
+				...check,
+				(p: unknown) =>
+					Array.isArray(p) && p.every(_p => check.some(f => f(_p)))
 			].some(f => f(placeholder))
 		) {
 			throw new TypeError(

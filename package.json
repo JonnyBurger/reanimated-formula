@@ -1,6 +1,6 @@
 {
   "name": "reanimated-formula",
-  "version": "0.2.0-alpha.3",
+  "version": "0.2.0-alpha.4",
   "description": "",
   "main": "dist/commonjs/index.js",
   "module": "dist/module/index.js",

@@ -1,0 +1,11 @@
+enum TokenType {
+	CONSTANT,
+	NAMED_FUNCTION,
+	OPERATOR,
+	VARIABLE,
+	NUMBER,
+	LEFT_PARENTHESIS,
+	RIGHT_PARENTHESIS
+}
+
+export default TokenType;

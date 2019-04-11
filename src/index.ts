@@ -1,8 +1,8 @@
 import reduceAst, {Variables} from './reduce-ast';
-import build from 'simple-math-ast';
+import build from './simple-math-ast';
 import Animated from 'react-native-reanimated';
-import {AstNode} from './types';
 import {InvalidExpressionError} from './InvalidExpressionError';
+import ASTNode from './simple-math-ast/parse/node';
 
 const packageJson = require('../package.json');
 
@@ -11,7 +11,7 @@ type Placeholder = number | Animated.Value<number | string | boolean>;
 const makeAst = (
 	args: TemplateStringsArray,
 	...placeholder: Placeholder[]
-): [AstNode, Variables] => {
+): [ASTNode, Variables] => {
 	let variableMap = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	if (args.length > variableMap.length) {
 		throw new TypeError(

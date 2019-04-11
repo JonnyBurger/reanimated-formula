@@ -1,5 +1,5 @@
 import test from 'ava';
-import build from 'simple-math-ast';
+import build from '../src/simple-math-ast';
 import formula, {nativeFormula} from '../dist';
 import reduceAst from '../dist/reduce-ast';
 import Animated from 'react-native-reanimated';
@@ -65,7 +65,8 @@ test('Should do sin() function', t => {
 test('Should do geometric functions', t => {
 	const a = 0.5;
 	t.is(
-		formula`cos(${a}) + sin(${a}) + tg(${a})`.__value,
+		formula`cos(${a}) + sin(${a}) + tan(${a})`.__value,
 		Math.cos(a) + Math.sin(a) + Math.tan(a)
 	);
+	t.is(formula`cot(${a})`.__value, 1 / Math.tan(a));
 });

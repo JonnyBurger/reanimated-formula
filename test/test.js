@@ -140,3 +140,26 @@ test('Weird spacing', t => {
 });
 
 test.todo('Should support ternary');
+test.todo('Should support pow');
+test.todo('Should support modulo');
+test.todo('Should support acos');
+test.todo('Should support asin');
+test.todo('Should support atan');
+test.todo('Should support exp');
+test.todo('Should support round');
+test.todo('Should support floor');
+test.todo('Should support ceil');
+test.todo('Should support lessThan');
+test.todo('Should support eq');
+test.todo('Should support greaterThan');
+test.todo('Should support lessOrEq');
+test.todo('Should support greaterOrEq');
+test.todo('Should support neq');
+test.todo('Should support and');
+test.todo('Should support or');
+test.todo('Should support defined');
+test.todo('Should support not');
+test.todo('Should support abs');
+test.todo('Should support diff');
+test.todo('Should support acc');
+test.todo('Should support color');

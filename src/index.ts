@@ -1,11 +1,12 @@
 import reduceAst, {Variables} from './reduce-ast';
 import build from 'simple-math-ast';
 import Animated from 'react-native-reanimated';
+import {AstNode} from './types';
 
-const formula = (
+const makeAst = (
 	args: TemplateStringsArray,
 	...placeholder: (number | Animated.Value<number | string | boolean>)[]
-) => {
+): [AstNode, Variables] => {
 	let variableMap = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	if (args.length > variableMap.length) {
 		throw new Error(
@@ -26,11 +27,23 @@ const formula = (
 		intersect = intersect.filter(Boolean);
 	}
 	const ast = build(intersect.join(''));
-	console.log(ast);
-	return reduceAst(ast, variables);
+	return [ast, variables];
 };
 
-const value = new Animated.Value(1);
-const value2 = new Animated.Value(2);
+export const nativeFormula = (
+	args: TemplateStringsArray,
+	...placeholder: number[]
+) => {
+	const [ast, variables] = makeAst(args, ...placeholder);
+	return reduceAst(ast, variables, 'native');
+};
 
-console.log(formula`${value} + ${value2}`);
+const reanimatedFormula = (
+	args: TemplateStringsArray,
+	...placeholder: (number | Animated.Value<number | string | boolean>)[]
+) => {
+	const [ast, variables] = makeAst(args, ...placeholder);
+	return reduceAst(ast, variables, 'reanimated');
+};
+
+export default reanimatedFormula;

@@ -1,10 +1,17 @@
 import {AstNode} from './types';
+import Animated from 'react-native-reanimated';
 
 export type Variables = {
 	[key: string]: any;
 };
 
-const reduceAst = (tree: AstNode, variables: Variables): number => {
+export type MathType = 'reanimated' | 'native';
+
+const reduceAst = (
+	tree: AstNode,
+	variables: Variables,
+	mathType: MathType
+): number | Animated.Node<number> => {
 	if (tree.token.type === 'NUMBER') {
 		return Number(tree.token.value);
 	}
@@ -14,39 +21,60 @@ const reduceAst = (tree: AstNode, variables: Variables): number => {
 		}
 		return variables[tree.token.value];
 	}
-	const left = reduceAst(tree.left as AstNode, variables);
-	const right = reduceAst(tree.right as AstNode, variables);
+	const left = reduceAst(tree.left as AstNode, variables, mathType);
+	const right = reduceAst(tree.right as AstNode, variables, mathType);
 	if (tree.token.type === 'NAMED_FUNCTION') {
 		if (tree.token.value === 'log') {
-			Math.log(left);
+			if (mathType === 'reanimated') {
+				throw new TypeError('log() is not supported by Reanimated');
+			}
+			return Math.log(left as number);
 		}
 		if (tree.token.value === 'sin') {
-			Math.sin(left);
+			if (mathType === 'reanimated') {
+				return Animated.sin(left);
+			}
+			return Math.sin(left as number);
 		}
 		if (tree.token.value === 'cos') {
-			Math.cos(left);
+			if (mathType === 'reanimated') {
+				return Animated.cos(left);
+			}
+			return Math.cos(left as number);
 		}
 		if (tree.token.value === 'tg') {
-			Math.tan(left);
+			if (mathType === 'reanimated') {
+				return Animated.tan(left);
+			}
+			return Math.tan(left as number);
 		}
 		if (tree.token.value === 'ctg') {
-			return 1 / Math.tan(left);
+			if (mathType === 'reanimated') {
+				return Animated.divide(1, Animated.tan(left));
+			}
+			return 1 / Math.tan(left as number);
 		}
 		if (tree.token.value === 'sqrt') {
-			return Math.sqrt(left);
+			if (mathType === 'reanimated') {
+				return Animated.sqrt(left);
+			}
+			return Math.sqrt(left as number);
 		}
 	}
 	if (tree.token.value === '+') {
-		return left + right;
+		if (mathType === 'reanimated') {
+			return Animated.add(left, right);
+		}
+		return (left as number) + (right as number);
 	}
 	if (tree.token.value === '-') {
-		return left - right;
+		return (left as number) - (right as number);
 	}
 	if (tree.token.value === '/') {
-		return left / right;
+		return (left as number) / (right as number);
 	}
 	if (tree.token.value === '*') {
-		return left * right;
+		return (left as number) * (right as number);
 	}
 	throw new Error('Could not parse!');
 };

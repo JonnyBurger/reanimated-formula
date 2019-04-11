@@ -55,7 +55,7 @@ const config: {rules: RuleWrapper[]} = {
 		{key: '[(\\[]', data: {type: TokenType.LEFT_PARENTHESIS}},
 		{key: '[)\\]]', data: {type: TokenType.RIGHT_PARENTHESIS}},
 		{key: '[0-9.,]+', data: {type: TokenType.NUMBER}},
-		{key: '[a-zA-Z]', data: {type: TokenType.VARIABLE}}
+		{key: '[a-zA-Z]+', data: {type: TokenType.VARIABLE}}
 	]
 };
 

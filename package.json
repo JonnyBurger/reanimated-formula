@@ -37,8 +37,5 @@
       "@babel/register",
       "./dist/_mocks.js"
     ]
-  },
-  "jest": {
-    "preset": "react-native"
   }
 }

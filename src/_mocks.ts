@@ -5,9 +5,11 @@ mockery.enable({
 	warnOnUnregistered: false
 });
 
-type Value = number | AnimatedValue;
+type ValueArray = (number | AnimatedValue)[];
+type SingleValue = number | AnimatedValue;
+type Value = SingleValue | ValueArray;
 
-const getValue = (node: Value) => {
+const getValue = (node: number | AnimatedValue) => {
 	if (typeof node === 'number') {
 		return node;
 	}
@@ -17,13 +19,20 @@ const getValue = (node: Value) => {
 mockery.registerMock('react-native-reanimated', {
 	Value: AnimatedValue,
 	Node: AnimatedValue,
-	add: (a: Value, b: Value) => new AnimatedValue(getValue(a) + getValue(b)),
-	sub: (a: Value, b: Value) => new AnimatedValue(getValue(a) - getValue(b)),
-	divide: (a: Value, b: Value) => new AnimatedValue(getValue(a) / getValue(b)),
-	multiply: (a: Value, b: Value) =>
+	add: (a: SingleValue, b: SingleValue) =>
+		new AnimatedValue(getValue(a) + getValue(b)),
+	sub: (a: SingleValue, b: SingleValue) =>
+		new AnimatedValue(getValue(a) - getValue(b)),
+	divide: (a: SingleValue, b: SingleValue) =>
+		new AnimatedValue(getValue(a) / getValue(b)),
+	multiply: (a: SingleValue, b: SingleValue) =>
 		new AnimatedValue(getValue(a) * getValue(b)),
-	sin: (a: Value) => new AnimatedValue(Math.sin(getValue(a))),
-	tan: (a: Value) => new AnimatedValue(Math.tan(getValue(a))),
-	cos: (a: Value) => new AnimatedValue(Math.cos(getValue(a))),
-	sqrt: (a: Value) => new AnimatedValue(Math.sqrt(getValue(a)))
+	sin: (a: SingleValue) => new AnimatedValue(Math.sin(getValue(a))),
+	tan: (a: SingleValue) => new AnimatedValue(Math.tan(getValue(a))),
+	cos: (a: SingleValue) => new AnimatedValue(Math.cos(getValue(a))),
+	sqrt: (a: SingleValue) => new AnimatedValue(Math.sqrt(getValue(a))),
+	min: (...a: ValueArray) =>
+		new AnimatedValue(Math.min(...a.map(b => getValue(b)))),
+	max: (...a: ValueArray) =>
+		new AnimatedValue(Math.max(...a.map(b => getValue(b))))
 });

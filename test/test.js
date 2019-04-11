@@ -139,8 +139,15 @@ test('Weird spacing', t => {
 	t.is(formula`2                     +                     1`.__value, 3);
 });
 
+test('Should support **', t => {
+	t.is(formula`2 ** 2`.__value, 4);
+	t.is(formula`2 ** 2 ** 2`.__value, 16);
+	t.is(formula`pow(2, 2)`.__value, 4);
+	t.is(formula`pow(2, 2, ${new Animated.Value(2)})`.__value, 16);
+	t.is(formula`pow(${[2, 2, new Animated.Value(2)]})`.__value, 16);
+});
+
 test.todo('Should support ternary');
-test.todo('Should support pow');
 test.todo('Should support modulo');
 test.todo('Should support acos');
 test.todo('Should support asin');
@@ -163,3 +170,4 @@ test.todo('Should support abs');
 test.todo('Should support diff');
 test.todo('Should support acc');
 test.todo('Should support color');
+test.todo('Should support concat');

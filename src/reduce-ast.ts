@@ -34,7 +34,7 @@ const reduceAst = (
 	if (tree.token.type === TokenType.NAMED_FUNCTION) {
 		if (tree.token.value === 'log') {
 			if (mathType === 'reanimated') {
-				throw new TypeError(
+				throw new InvalidExpressionError(
 					`${logPrefix} log() is not supported by Reanimated`
 				);
 			}
@@ -42,7 +42,9 @@ const reduceAst = (
 		}
 		if (tree.token.value === 'sin') {
 			if (Array.isArray(left)) {
-				throw new TypeError(`${logPrefix} Cannot pass an array to sin()`);
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to sin()`
+				);
 			}
 			if (mathType === 'reanimated') {
 				return Animated.sin(left);
@@ -51,7 +53,9 @@ const reduceAst = (
 		}
 		if (tree.token.value === 'cos') {
 			if (Array.isArray(left)) {
-				throw new TypeError(`${logPrefix} Cannot pass an array to cos()`);
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to cos()`
+				);
 			}
 			if (mathType === 'reanimated') {
 				return Animated.cos(left);
@@ -60,7 +64,9 @@ const reduceAst = (
 		}
 		if (tree.token.value === 'tan') {
 			if (Array.isArray(left)) {
-				throw new TypeError(`${logPrefix} Cannot pass an array to tan()`);
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to tan()`
+				);
 			}
 			if (mathType === 'reanimated') {
 				return Animated.tan(left);
@@ -69,7 +75,9 @@ const reduceAst = (
 		}
 		if (tree.token.value === 'cot') {
 			if (Array.isArray(left)) {
-				throw new TypeError(`${logPrefix} Cannot pass an array to cot()`);
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to cot()`
+				);
 			}
 			if (mathType === 'reanimated') {
 				return Animated.divide(1, Animated.tan(left));
@@ -78,7 +86,9 @@ const reduceAst = (
 		}
 		if (tree.token.value === 'sqrt') {
 			if (Array.isArray(left)) {
-				throw new TypeError(`${logPrefix} Cannot pass an array to sqrt()`);
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to sqrt()`
+				);
 			}
 			if (mathType === 'reanimated') {
 				return Animated.sqrt(left);
@@ -88,7 +98,9 @@ const reduceAst = (
 
 		if (tree.token.value === 'min') {
 			if (!Array.isArray(left) || left.length < 2) {
-				throw new TypeError(`${logPrefix} Must pass multiple values to min()`);
+				throw new InvalidExpressionError(
+					`${logPrefix} Must pass multiple values to min()`
+				);
 			}
 			if (mathType === 'reanimated') {
 				// @ts-ignore
@@ -98,7 +110,9 @@ const reduceAst = (
 		}
 		if (tree.token.value === 'max') {
 			if (!Array.isArray(left) || left.length < 2) {
-				throw new TypeError(`${logPrefix} Must pass multiple values to max()`);
+				throw new InvalidExpressionError(
+					`${logPrefix} Must pass multiple values to max()`
+				);
 			}
 			if (mathType === 'reanimated') {
 				// @ts-ignore
@@ -106,11 +120,28 @@ const reduceAst = (
 			}
 			return Math.max(...(left as number[]));
 		}
+		if (tree.token.value === 'pow') {
+			if (!Array.isArray(left) || left.length < 2) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Must pass multiple values to pow()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				// @ts-ignore
+				return Animated.pow(...left);
+			}
+			return left.reduce(
+				(b, c, index) => (index > 0 ? Math.pow(b as number, c as number) : c),
+				0
+			) as number;
+		}
 	}
 	const right = reduceAst(tree.right as ASTNode, variables, mathType);
 	if (tree.token.value === '+') {
 		if (Array.isArray(left) || Array.isArray(right)) {
-			throw new TypeError(`${logPrefix} Cannot use operator "+" on array`);
+			throw new InvalidExpressionError(
+				`${logPrefix} Cannot use operator "+" on array`
+			);
 		}
 		if (mathType === 'reanimated') {
 			return Animated.add(left, right);
@@ -119,27 +150,57 @@ const reduceAst = (
 	}
 	if (tree.token.value === '-') {
 		if (Array.isArray(left) || Array.isArray(right)) {
-			throw new TypeError(`${logPrefix} Cannot use operator "-" on array`);
+			throw new InvalidExpressionError(
+				`${logPrefix} Cannot use operator "-" on array`
+			);
 		}
+		if (mathType === 'reanimated') {
+			return Animated.sub(left, right);
+		}
+
 		return (left as number) - (right as number);
 	}
 	if (tree.token.value === '/') {
 		if (Array.isArray(left) || Array.isArray(right)) {
-			throw new TypeError(`${logPrefix} Cannot use operator "/" on array`);
+			throw new InvalidExpressionError(
+				`${logPrefix} Cannot use operator "/" on array`
+			);
 		}
+		if (mathType === 'reanimated') {
+			return Animated.divide(left, right);
+		}
+
 		return (left as number) / (right as number);
+	}
+	if (tree.token.value === '**') {
+		if (Array.isArray(left) || Array.isArray(right)) {
+			throw new InvalidExpressionError(
+				`${logPrefix} Cannot use operator "**" on array`
+			);
+		}
+		if (mathType === 'reanimated') {
+			return Animated.pow(left, right);
+		}
+
+		return (left as number) ** (right as number);
 	}
 	if (tree.token.value === '*') {
 		if (Array.isArray(left) || Array.isArray(right)) {
-			throw new TypeError(`${logPrefix} Cannot use operator "*" on array`);
+			throw new InvalidExpressionError(
+				`${logPrefix} Cannot use operator "*" on array`
+			);
 		}
+		if (mathType === 'reanimated') {
+			return Animated.multiply(left, right);
+		}
+
 		return (left as number) * (right as number);
 	}
 	if (tree.token.value === ',') {
-		if (Array.isArray(left) || Array.isArray(right)) {
-			throw new TypeError(`${logPrefix} Cannot use operator "," on array`);
-		}
-		return [left, right];
+		return [
+			...(Array.isArray(left) ? left : [left]),
+			...(Array.isArray(right) ? right : [right])
+		];
 	}
 	throw new Error('Could not parse!');
 };

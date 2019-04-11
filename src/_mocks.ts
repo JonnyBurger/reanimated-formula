@@ -34,5 +34,10 @@ mockery.registerMock('react-native-reanimated', {
 	min: (...a: ValueArray) =>
 		new AnimatedValue(Math.min(...a.map(b => getValue(b)))),
 	max: (...a: ValueArray) =>
-		new AnimatedValue(Math.max(...a.map(b => getValue(b))))
+		new AnimatedValue(Math.max(...a.map(b => getValue(b)))),
+	pow: (...a: ValueArray) =>
+		new AnimatedValue(a.reduce(
+			(b, c, index) => (index > 0 ? Math.pow(getValue(b), getValue(c)) : c),
+			0
+		) as number)
 });

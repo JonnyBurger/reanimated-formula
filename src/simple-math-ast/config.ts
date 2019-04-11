@@ -15,7 +15,7 @@ export type Token = Rule & {
 const config: {rules: RuleWrapper[]} = {
 	rules: [
 		{
-			key: 'sin|cos|tan|cot|log|sqrt|min|max',
+			key: 'sin|cos|tan|cot|log|sqrt|min|max|pow',
 			data: {
 				type: TokenType.NAMED_FUNCTION,
 				args: 1,
@@ -26,6 +26,14 @@ const config: {rules: RuleWrapper[]} = {
 			key: 'PI|pi',
 			data: {
 				type: TokenType.CONSTANT
+			}
+		},
+		{
+			key: '\\*\\*',
+			data: {
+				type: TokenType.OPERATOR,
+				args: 2,
+				precedence: 2
 			}
 		},
 		{

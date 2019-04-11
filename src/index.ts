@@ -84,7 +84,7 @@ const reanimatedFormula = (
 					argArray.length > 0
 						? argArray.join('<variable>')
 						: placeholders.join(',')
-				} could not be parsed`
+				} could not be parsed: ${err.message}`
 			);
 		} else {
 			throw err;

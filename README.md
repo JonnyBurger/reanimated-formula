@@ -22,6 +22,9 @@
 | Animated.asin(a)   | formula\`asin(${a})\`   |   |   |   |
 | Animated.atan(a)   | formula\`atan(${a})\`   |   |   |   |
 | Animated.acos(a)   | formula\`acos(${a})\`   |   |   |   |
+| Animated.round(a)   | formula\`round(${a})\`   |   |   |   |
+| Animated.floor(a)   | formula\`floor(${a})\`   |   |   |   |
+| Animated.ceil(a)   | formula\`ceil(${a})\`   |   |   |   |
 
 
 

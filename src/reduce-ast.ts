@@ -117,6 +117,39 @@ const reduceAst = (
 			}
 			return Math.acos(left as number);
 		}
+		if (tree.token.value === 'round') {
+			if (Array.isArray(left)) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to round()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				return Animated.round(left);
+			}
+			return Math.round(left as number);
+		}
+		if (tree.token.value === 'ceil') {
+			if (Array.isArray(left)) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to ceil()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				return Animated.ceil(left);
+			}
+			return Math.ceil(left as number);
+		}
+		if (tree.token.value === 'floor') {
+			if (Array.isArray(left)) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to floor()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				return Animated.floor(left);
+			}
+			return Math.floor(left as number);
+		}
 		if (tree.token.value === 'cot') {
 			if (Array.isArray(left)) {
 				throw new InvalidExpressionError(

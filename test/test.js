@@ -181,10 +181,23 @@ test('Should support acos, asin and atan', t => {
 	t.throws(() => formula`asin(${[a]})`);
 });
 
+test('Should support round, ceil and floor', t => {
+	const a = 0.33;
+	t.is(formula`ceil(${new Animated.Value(a)})`.__value, Math.ceil(a));
+	t.is(formula`round(${new Animated.Value(a)})`.__value, Math.round(a));
+	t.is(formula`floor(${new Animated.Value(a)})`.__value, Math.floor(a));
+	t.is(
+		formula`floor(${new Animated.Value(a)}) + round(${new Animated.Value(
+			a
+		)}) + ceil(${new Animated.Value(a)})`.__value,
+		Math.floor(a) + Math.round(a) + Math.ceil(a)
+	);
+	t.throws(() => formula`floor(${[a]})`);
+	t.throws(() => formula`round(${[a]})`);
+	t.throws(() => formula`ceil(${[a]})`);
+});
+
 test.todo('Should support ternary');
-test.todo('Should support round');
-test.todo('Should support floor');
-test.todo('Should support ceil');
 test.todo('Should support lessThan');
 test.todo('Should support eq');
 test.todo('Should support greaterThan');

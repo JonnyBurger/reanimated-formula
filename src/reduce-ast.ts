@@ -163,6 +163,20 @@ const reduceAst = (
 			}
 			return Math.abs(left as number);
 		}
+		if (tree.token.value === 'deg') {
+			if (Array.isArray(left)) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to deg()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				return (Animated.concat(
+					(left as unknown) as Animated.Node<string>,
+					('deg' as unknown) as Animated.Node<string>
+				) as unknown) as Animated.Node<number>;
+			}
+			return left as number;
+		}
 		if (tree.token.value === 'diff') {
 			if (Array.isArray(left)) {
 				throw new InvalidExpressionError(

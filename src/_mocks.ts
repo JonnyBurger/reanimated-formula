@@ -56,6 +56,7 @@ mockery.registerMock('react-native-reanimated', {
 	ceil: (a: SingleValue) => new AnimatedValue(Math.ceil(getValue(a))),
 	acc: (a: SingleValue) => 'acc_mock' + getValue(a),
 	diff: (a: SingleValue) => 'diff_mock' + getValue(a),
+	concat: (a: SingleValue, b: string) => getValue(a) + b,
 	defined: (a: SingleValue) => 'defined_mock' + getValue(a),
 	eq: (a: SingleValue, b: SingleValue) =>
 		new AnimatedValue(Number(getValue(a) === getValue(b))),

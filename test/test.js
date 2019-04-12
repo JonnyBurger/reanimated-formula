@@ -241,5 +241,8 @@ test('Should support ternary', t => {
 	t.throws(() => formula`5 ? 2`);
 });
 
+test('Should support deg()', t => {
+	t.is(formula`deg(20)`, '20deg');
+});
+
 test.todo('Should support color');
-test.todo('Should support concat');

@@ -225,10 +225,13 @@ test('Should support diff', t => {
 });
 
 test('Should support acc', t => {
-	t.is(formula`diff(1 - ${new Animated.Value(2)})`, `acc_mock-1`);
+	t.is(formula`acc(1 - ${new Animated.Value(2)})`, `acc_mock-1`);
+});
+
+test('Should support defined', t => {
+	t.is(formula`defined(1 - ${new Animated.Value(2)})`, `defined_mock-1`);
 });
 
 test.todo('Should support ternary');
-test.todo('Should support defined');
 test.todo('Should support color');
 test.todo('Should support concat');

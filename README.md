@@ -35,6 +35,7 @@
 | Animated.not(a) | formula\`!${a}\` | | | | |
 | Animated.diff(a) | formula\`diff(${a})\` | | | | |
 | Animated.acc(a) | formula\`acc(${a})\` | | | | |
+| Animated.defined(a) | formula\`defined(${a})\` | | | | |
 
 
 

@@ -183,6 +183,17 @@ const reduceAst = (
 			}
 			throw new TypeError('acc() is not supported by native JS math');
 		}
+		if (tree.token.value === 'defined') {
+			if (Array.isArray(left)) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to defined()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				return Animated.defined(left);
+			}
+			throw new TypeError('defined() is not supported by native JS math');
+		}
 		if (tree.token.value === 'cot') {
 			if (Array.isArray(left)) {
 				throw new InvalidExpressionError(

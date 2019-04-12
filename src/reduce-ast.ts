@@ -309,13 +309,85 @@ const reduceAst = (
 
 		return (left as number) && (right as number);
 	}
+	if (tree.token.value === '<') {
+		if (Array.isArray(left) || Array.isArray(right)) {
+			throw new InvalidExpressionError(
+				`${logPrefix} Cannot use operator "<" on array`
+			);
+		}
+		if (mathType === 'reanimated') {
+			return Animated.lessThan(left, right);
+		}
+
+		return Number((left as number) < (right as number));
+	}
+	if (tree.token.value === '>') {
+		if (Array.isArray(left) || Array.isArray(right)) {
+			throw new InvalidExpressionError(
+				`${logPrefix} Cannot use operator ">" on array`
+			);
+		}
+		if (mathType === 'reanimated') {
+			return Animated.greaterThan(left, right);
+		}
+
+		return Number((left as number) > (right as number));
+	}
+	if (tree.token.value === '>=') {
+		if (Array.isArray(left) || Array.isArray(right)) {
+			throw new InvalidExpressionError(
+				`${logPrefix} Cannot use operator ">=" on array`
+			);
+		}
+		if (mathType === 'reanimated') {
+			return Animated.greaterOrEq(left, right);
+		}
+
+		return Number((left as number) >= (right as number));
+	}
+	if (tree.token.value === '<=') {
+		if (Array.isArray(left) || Array.isArray(right)) {
+			throw new InvalidExpressionError(
+				`${logPrefix} Cannot use operator "<=" on array`
+			);
+		}
+		if (mathType === 'reanimated') {
+			return Animated.lessOrEq(left, right);
+		}
+
+		return Number((left as number) <= (right as number));
+	}
+	if (tree.token.value === '===') {
+		if (Array.isArray(left) || Array.isArray(right)) {
+			throw new InvalidExpressionError(
+				`${logPrefix} Cannot use operator "===" on array`
+			);
+		}
+		if (mathType === 'reanimated') {
+			return Animated.eq(left, right);
+		}
+
+		return Number((left as number) === (right as number));
+	}
+	if (tree.token.value === '!==') {
+		if (Array.isArray(left) || Array.isArray(right)) {
+			throw new InvalidExpressionError(
+				`${logPrefix} Cannot use operator "!==" on array`
+			);
+		}
+		if (mathType === 'reanimated') {
+			return Animated.neq(left, right);
+		}
+
+		return Number((left as number) !== (right as number));
+	}
 	if (tree.token.value === ',') {
 		return [
 			...(Array.isArray(left) ? left : [left]),
 			...(Array.isArray(right) ? right : [right])
 		];
 	}
-	throw new Error('Could not parse!');
+	throw new Error(`Could not parse! Operator: ${tree.token.value}`);
 };
 
 export default reduceAst;

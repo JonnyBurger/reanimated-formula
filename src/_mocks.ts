@@ -52,5 +52,17 @@ mockery.registerMock('react-native-reanimated', {
 	acos: (a: SingleValue) => new AnimatedValue(Math.acos(getValue(a))),
 	floor: (a: SingleValue) => new AnimatedValue(Math.floor(getValue(a))),
 	round: (a: SingleValue) => new AnimatedValue(Math.round(getValue(a))),
-	ceil: (a: SingleValue) => new AnimatedValue(Math.ceil(getValue(a)))
+	ceil: (a: SingleValue) => new AnimatedValue(Math.ceil(getValue(a))),
+	eq: (a: SingleValue, b: SingleValue) =>
+		new AnimatedValue(Number(getValue(a) === getValue(b))),
+	neq: (a: SingleValue, b: SingleValue) =>
+		new AnimatedValue(Number(getValue(a) !== getValue(b))),
+	lessThan: (a: SingleValue, b: SingleValue) =>
+		new AnimatedValue(Number(getValue(a) < getValue(b))),
+	greaterThan: (a: SingleValue, b: SingleValue) =>
+		new AnimatedValue(Number(getValue(a) > getValue(b))),
+	greaterOrEq: (a: SingleValue, b: SingleValue) =>
+		new AnimatedValue(Number(getValue(a) >= getValue(b))),
+	lessOrEq: (a: SingleValue, b: SingleValue) =>
+		new AnimatedValue(Number(getValue(a) <= getValue(b)))
 });

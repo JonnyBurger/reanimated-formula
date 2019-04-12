@@ -197,13 +197,18 @@ test('Should support round, ceil and floor', t => {
 	t.throws(() => formula`ceil(${[a]})`);
 });
 
+test('Should support comparison operators', t => {
+	t.is(formula`1 < 2`.__value, 1);
+	t.is(formula`1 <= 1`.__value, 1);
+	t.is(formula`1 === 1`.__value, 1);
+	t.is(formula`1 === 0`.__value, 0);
+	t.is(formula`1 !== 0`.__value, 1);
+	t.is(formula`1 >= 1`.__value, 1);
+	t.is(formula`1 >= ${new Animated.Value(0)}`.__value, 1);
+	t.throws(() => formula`1 == 1`);
+});
+
 test.todo('Should support ternary');
-test.todo('Should support lessThan');
-test.todo('Should support eq');
-test.todo('Should support greaterThan');
-test.todo('Should support lessOrEq');
-test.todo('Should support greaterOrEq');
-test.todo('Should support neq');
 test.todo('Should support defined');
 test.todo('Should support not');
 test.todo('Should support abs');

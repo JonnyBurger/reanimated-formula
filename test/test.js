@@ -159,12 +159,29 @@ test('Should support % operator', t => {
 	t.is(formula`${a} % ${a}`.__value, 0);
 });
 
+test('Should support exp() function', t => {
+	const a = new Animated.Value(2);
+	t.is(formula`exp(${a})`.__value, Math.exp(2));
+	t.throws(() => formula`exp(${[2]})`);
+});
+
+test('Should support acos, asin and atan', t => {
+	const a = 0.33;
+	t.is(formula`asin(${new Animated.Value(a)})`.__value, Math.asin(a));
+	t.is(formula`acos(${new Animated.Value(a)})`.__value, Math.acos(a));
+	t.is(formula`atan(${new Animated.Value(a)})`.__value, Math.atan(a));
+	t.is(
+		formula`atan(${new Animated.Value(a)}) + acos(${new Animated.Value(
+			a
+		)}) + asin(${new Animated.Value(a)})`.__value,
+		Math.atan(a) + Math.acos(a) + Math.asin(a)
+	);
+	t.throws(() => formula`atan(${[a]})`);
+	t.throws(() => formula`acos(${[a]})`);
+	t.throws(() => formula`asin(${[a]})`);
+});
+
 test.todo('Should support ternary');
-test.todo('Should support modulo');
-test.todo('Should support acos');
-test.todo('Should support asin');
-test.todo('Should support atan');
-test.todo('Should support exp');
 test.todo('Should support round');
 test.todo('Should support floor');
 test.todo('Should support ceil');

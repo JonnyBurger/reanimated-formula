@@ -17,6 +17,11 @@
 | Animated.pow(a, b, c)   | formula\`${a} ** ${b} ** ${c}\` <br/>or<br> formula\`pow(${[a, b, c]})\`   |   |   |   |
 | Animated.and(a, b)   | formula\`${a} && ${b}\`   |   |   |   |
 | Animated.or(a, b)   | formula\`${a} \|\| ${b}\`   |   |   |   |
+| Animated.modulo(a, b)   | formula\`${a} % ${b}\`   |   |   |   |
+| Animated.exp(a)   | formula\`exp(${a})\`   |   |   |   |
+| Animated.asin(a)   | formula\`asin(${a})\`   |   |   |   |
+| Animated.atan(a)   | formula\`atan(${a})\`   |   |   |   |
+| Animated.acos(a)   | formula\`acos(${a})\`   |   |   |   |
 
 
 

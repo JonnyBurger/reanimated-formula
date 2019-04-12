@@ -51,6 +51,17 @@ const reduceAst = (
 			}
 			return Math.sin(left as number);
 		}
+		if (tree.token.value === 'exp') {
+			if (Array.isArray(left)) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to exp()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				return Animated.exp(left);
+			}
+			return Math.exp(left as number);
+		}
 		if (tree.token.value === 'cos') {
 			if (Array.isArray(left)) {
 				throw new InvalidExpressionError(
@@ -72,6 +83,39 @@ const reduceAst = (
 				return Animated.tan(left);
 			}
 			return Math.tan(left as number);
+		}
+		if (tree.token.value === 'asin') {
+			if (Array.isArray(left)) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to asin()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				return Animated.asin(left);
+			}
+			return Math.asin(left as number);
+		}
+		if (tree.token.value === 'atan') {
+			if (Array.isArray(left)) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to atan()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				return Animated.atan(left);
+			}
+			return Math.atan(left as number);
+		}
+		if (tree.token.value === 'acos') {
+			if (Array.isArray(left)) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to acos()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				return Animated.acos(left);
+			}
+			return Math.acos(left as number);
 		}
 		if (tree.token.value === 'cot') {
 			if (Array.isArray(left)) {

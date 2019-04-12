@@ -216,10 +216,19 @@ test('Should support ! operator', t => {
 	t.is(formula`!0 === !0`.__value, 1);
 });
 
+test('Should support abs', t => {
+	t.is(formula`abs(1 - ${new Animated.Value(2)})`.__value, 1);
+});
+
+test('Should support diff', t => {
+	t.is(formula`diff(1 - ${new Animated.Value(2)})`, `diff_mock-1`);
+});
+
+test('Should support acc', t => {
+	t.is(formula`diff(1 - ${new Animated.Value(2)})`, `acc_mock-1`);
+});
+
 test.todo('Should support ternary');
 test.todo('Should support defined');
-test.todo('Should support abs');
-test.todo('Should support diff');
-test.todo('Should support acc');
 test.todo('Should support color');
 test.todo('Should support concat');

@@ -25,6 +25,7 @@
 | Animated.round(a)   | formula\`round(${a})\`   |   |   |   |
 | Animated.floor(a)   | formula\`floor(${a})\`   |   |   |   |
 | Animated.ceil(a)   | formula\`ceil(${a})\`   |   |   |   |
+| Animated.abs(a)   | formula\`abs(${a})\`   |   |   |   |
 | Animated.eq(a, b) | formula\`${a} === ${b}\` | | | | |
 | Animated.neq(a, b) | formula\`${a} !== ${b}\` | | | | |
 | Animated.greaterThan(a, b) | formula\`${a} > ${b}\` | | | | |
@@ -32,6 +33,8 @@
 | Animated.greaterOrEq(a, b) | formula\`${a} >= ${b}\` | | | | |
 | Animated.lessOrEq(a, b) | formula\`${a} <= ${b}\` | | | | |
 | Animated.not(a) | formula\`!${a}\` | | | | |
+| Animated.diff(a) | formula\`diff(${a})\` | | | | |
+| Animated.acc(a) | formula\`acc(${a})\` | | | | |
 
 
 

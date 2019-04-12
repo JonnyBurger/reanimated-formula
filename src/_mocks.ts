@@ -51,8 +51,11 @@ mockery.registerMock('react-native-reanimated', {
 	atan: (a: SingleValue) => new AnimatedValue(Math.atan(getValue(a))),
 	acos: (a: SingleValue) => new AnimatedValue(Math.acos(getValue(a))),
 	floor: (a: SingleValue) => new AnimatedValue(Math.floor(getValue(a))),
+	abs: (a: SingleValue) => new AnimatedValue(Math.abs(getValue(a))),
 	round: (a: SingleValue) => new AnimatedValue(Math.round(getValue(a))),
 	ceil: (a: SingleValue) => new AnimatedValue(Math.ceil(getValue(a))),
+	acc: (a: SingleValue) => 'acc_mock' + getValue(a),
+	diff: (a: SingleValue) => 'diff_mock' + getValue(a),
 	eq: (a: SingleValue, b: SingleValue) =>
 		new AnimatedValue(Number(getValue(a) === getValue(b))),
 	neq: (a: SingleValue, b: SingleValue) =>

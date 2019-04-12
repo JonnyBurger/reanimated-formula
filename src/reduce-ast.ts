@@ -150,6 +150,39 @@ const reduceAst = (
 			}
 			return Math.floor(left as number);
 		}
+		if (tree.token.value === 'abs') {
+			if (Array.isArray(left)) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to abs()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				return Animated.abs(left);
+			}
+			return Math.abs(left as number);
+		}
+		if (tree.token.value === 'diff') {
+			if (Array.isArray(left)) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to diff()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				return Animated.diff(left);
+			}
+			throw new TypeError('diff() is not supported by native JS math');
+		}
+		if (tree.token.value === 'acc') {
+			if (Array.isArray(left)) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot pass an array to acc()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				return Animated.acc(left);
+			}
+			throw new TypeError('acc() is not supported by native JS math');
+		}
 		if (tree.token.value === 'cot') {
 			if (Array.isArray(left)) {
 				throw new InvalidExpressionError(

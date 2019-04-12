@@ -16,7 +16,7 @@ const config: {rules: RuleWrapper[]} = {
 	rules: [
 		{
 			key:
-				'round|floor|ceil|asin|acos|atan|sin|cos|tan|cot|log|sqrt|min|max|pow|exp',
+				'round|floor|ceil|asin|acos|atan|sin|cos|tan|cot|log|sqrt|min|max|pow|exp|abs|acc|diff',
 			data: {
 				type: TokenType.NAMED_FUNCTION,
 				args: 1,

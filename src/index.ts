@@ -65,7 +65,11 @@ export const nativeFormula = (
 
 	validateArgs(placeholders);
 	const [ast, variables] = makeAst(argArray, ...placeholders);
-	return reduceAst(ast, variables, 'native');
+	const result = reduceAst(ast, variables, 'native');
+	if (Array.isArray(result)) {
+		throw new InvalidExpressionError('Result is an array');
+	}
+	return result;
 };
 
 const reanimatedFormula = (
@@ -76,7 +80,11 @@ const reanimatedFormula = (
 	validateArgs(placeholders);
 	try {
 		const [ast, variables] = makeAst(argArray, ...placeholders);
-		return reduceAst(ast, variables, 'reanimated');
+		const result = reduceAst(ast, variables, 'reanimated');
+		if (Array.isArray(result)) {
+			throw new InvalidExpressionError('Result is an array');
+		}
+		return result;
 	} catch (err) {
 		if (err.name === 'InvalidExpressionError') {
 			throw new InvalidExpressionError(

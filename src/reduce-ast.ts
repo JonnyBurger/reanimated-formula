@@ -10,11 +10,13 @@ export type Variables = {
 
 export type MathType = 'reanimated' | 'native';
 
+type Node = number | Animated.Node<number>;
+
 const reduceAst = (
 	tree: ASTNode,
 	variables: Variables,
 	mathType: MathType
-): number | Animated.Node<number> | (number | Animated.Node<number>)[] => {
+): Node | (Node)[] => {
 	if (!tree) {
 		throw new InvalidExpressionError('Could not parse');
 	}
@@ -442,6 +444,32 @@ const reduceAst = (
 			...(Array.isArray(left) ? left : [left]),
 			...(Array.isArray(right) ? right : [right])
 		];
+	}
+	if (tree.token.value === ':') {
+		if (Array.isArray(left)) {
+			throw new InvalidExpressionError(
+				'Left expression of ternary expression cannot be an array'
+			);
+		}
+		if (Array.isArray(right)) {
+			throw new InvalidExpressionError(
+				'Right expression of ternary expression cannot be an array'
+			);
+		}
+		return [left, right];
+	}
+	if (tree.token.value === '?') {
+		if (!Array.isArray(right) || right.length !== 2) {
+			throw new InvalidExpressionError(
+				'Right value of ? operator must be an array with 2 elements'
+			);
+		}
+		if (Array.isArray(left)) {
+			throw new InvalidExpressionError(
+				'Left value of ? operator must cannot be an array'
+			);
+		}
+		return Animated.cond(left, right[0], right[1]);
 	}
 	throw new Error(`Could not parse! Operator: ${tree.token.value}`);
 };

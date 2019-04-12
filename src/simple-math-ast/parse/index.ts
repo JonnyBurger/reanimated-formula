@@ -74,7 +74,7 @@ const parse = (tokens: Token[], variables: Variables) => {
 		addOperatorNode(nodes, ops.pop() as Token);
 	}
 	if (nodes.length > 1) {
-		throw new InvalidExpressionError('Could not parse');
+		throw new InvalidExpressionError('Could not parse, too many nodes');
 	}
 	return nodes.pop() as ASTNode;
 };

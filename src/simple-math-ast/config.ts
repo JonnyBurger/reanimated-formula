@@ -126,6 +126,14 @@ const config: {rules: RuleWrapper[]} = {
 			}
 		},
 		{key: '[(\\[]', data: {type: TokenType.LEFT_PARENTHESIS}},
+		{
+			key: '\\?',
+			data: {type: TokenType.OPERATOR, args: 2, precedence: 5}
+		},
+		{
+			key: '\\:',
+			data: {type: TokenType.OPERATOR, args: 2, precedence: 6}
+		},
 		{key: '[)\\]]', data: {type: TokenType.RIGHT_PARENTHESIS}},
 		{key: '[0-9.,]+', data: {type: TokenType.NUMBER}},
 		{key: '[a-zA-Z]+', data: {type: TokenType.VARIABLE}}

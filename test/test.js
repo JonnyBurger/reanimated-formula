@@ -232,6 +232,14 @@ test('Should support defined', t => {
 	t.is(formula`defined(1 - ${new Animated.Value(2)})`, `defined_mock-1`);
 });
 
-test.todo('Should support ternary');
+test('Should support ternary', t => {
+	t.is(formula`1 ? 5 : 2`.__value, 5);
+	t.is(formula`0 ? 5 : 2`.__value, 2);
+	t.is(formula`0 ? 5 : 0 ? 2 : 0`.__value, 0);
+	t.is(formula`0 ? 5 : 0 ? 2 : 1`.__value, 1);
+	t.throws(() => formula`5 : 2`);
+	t.throws(() => formula`5 ? 2`);
+});
+
 test.todo('Should support color');
 test.todo('Should support concat');

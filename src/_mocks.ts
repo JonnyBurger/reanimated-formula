@@ -69,5 +69,7 @@ mockery.registerMock('react-native-reanimated', {
 		new AnimatedValue(Number(getValue(a) >= getValue(b))),
 	lessOrEq: (a: SingleValue, b: SingleValue) =>
 		new AnimatedValue(Number(getValue(a) <= getValue(b))),
-	not: (a: SingleValue) => new AnimatedValue(Number(!getValue(a)))
+	not: (a: SingleValue) => new AnimatedValue(Number(!getValue(a))),
+	cond: (a: SingleValue, b: SingleValue, c: SingleValue) =>
+		new AnimatedValue(getValue(a) ? getValue(b) : getValue(c))
 });

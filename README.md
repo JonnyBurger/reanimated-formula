@@ -36,6 +36,8 @@
 | Animated.diff(a) | formula\`diff(${a})\` | | | | |
 | Animated.acc(a) | formula\`acc(${a})\` | | | | |
 | Animated.defined(a) | formula\`defined(${a})\` | | | | |
+| Animated.cond(a, b) | formula\`${a} ? ${b} : 0\` | | | | |
+| Animated.cond(a, b, c) | formula\`${a} ? ${b} : ${c}\` | | | | |
 
 
 

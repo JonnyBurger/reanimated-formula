@@ -43,5 +43,7 @@ mockery.registerMock('react-native-reanimated', {
 	and: (a: SingleValue, b: SingleValue) =>
 		new AnimatedValue(getValue(a) && getValue(b)),
 	or: (a: SingleValue, b: SingleValue) =>
-		new AnimatedValue(getValue(a) || getValue(b))
+		new AnimatedValue(getValue(a) || getValue(b)),
+	modulo: (a: SingleValue, b: SingleValue) =>
+		new AnimatedValue(getValue(a) % getValue(b))
 });

@@ -53,7 +53,7 @@ const config: {rules: RuleWrapper[]} = {
 			}
 		},
 		{
-			key: '[\\*\\/]',
+			key: '[\\*\\/\\%]',
 			data: {
 				type: TokenType.OPERATOR,
 				args: 2,

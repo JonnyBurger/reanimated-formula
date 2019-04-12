@@ -153,6 +153,12 @@ test('Should support and / or', t => {
 	t.is(formula`0 || 0 || 22`.__value, 22);
 });
 
+test('Should support % operator', t => {
+	const a = new Animated.Value(5);
+	t.is(formula`5 % 2`.__value, 1);
+	t.is(formula`${a} % ${a}`.__value, 0);
+});
+
 test.todo('Should support ternary');
 test.todo('Should support modulo');
 test.todo('Should support acos');

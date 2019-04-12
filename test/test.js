@@ -208,9 +208,16 @@ test('Should support comparison operators', t => {
 	t.throws(() => formula`1 == 1`);
 });
 
+test('Should support ! operator', t => {
+	t.is(formula`!1`.__value, 0);
+	t.is(formula`!0`.__value, 1);
+	t.is(formula`!0 === 1`.__value, 1);
+	t.is(formula`!(0 === 0)`.__value, 0);
+	t.is(formula`!0 === !0`.__value, 1);
+});
+
 test.todo('Should support ternary');
 test.todo('Should support defined');
-test.todo('Should support not');
 test.todo('Should support abs');
 test.todo('Should support diff');
 test.todo('Should support acc');

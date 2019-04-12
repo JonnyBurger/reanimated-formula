@@ -212,6 +212,18 @@ const reduceAst = (
 				0
 			) as number;
 		}
+		if (tree.token.value === '!') {
+			if (Array.isArray(left)) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Cannot use operator "!" on array`
+				);
+			}
+			if (mathType === 'reanimated') {
+				// @ts-ignore
+				return Animated.not(left);
+			}
+			return Number(!left);
+		}
 	}
 	const right = reduceAst(tree.right as ASTNode, variables, mathType);
 	if (tree.token.value === '+') {

@@ -12,7 +12,8 @@ import {
 
 import ASTNode from './node';
 import {Token} from '../config';
-import {Variables} from 'src/reduce-ast';
+import {Variables} from '../../reduce-ast';
+import {InvalidExpressionError} from '../../InvalidExpressionError';
 
 const addOperandNode = (nodes: ASTNode[], token: Token) => {
 	const node = new ASTNode(token);
@@ -73,7 +74,7 @@ const parse = (tokens: Token[], variables: Variables) => {
 		addOperatorNode(nodes, ops.pop() as Token);
 	}
 	if (nodes.length > 1) {
-		throw new TypeError('Could not parse expression');
+		throw new InvalidExpressionError('Could not parse');
 	}
 	return nodes.pop() as ASTNode;
 };

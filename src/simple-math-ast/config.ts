@@ -70,6 +70,14 @@ const config: {rules: RuleWrapper[]} = {
 			}
 		},
 		{
+			key: '\\!',
+			data: {
+				type: TokenType.NAMED_FUNCTION,
+				args: 1,
+				precedence: 4
+			}
+		},
+		{
 			key: '\\>',
 			data: {
 				type: TokenType.OPERATOR,

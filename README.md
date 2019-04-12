@@ -31,6 +31,7 @@
 | Animated.lessThan(a, b) | formula\`${a} < ${b}\` | | | | |
 | Animated.greaterOrEq(a, b) | formula\`${a} >= ${b}\` | | | | |
 | Animated.lessOrEq(a, b) | formula\`${a} <= ${b}\` | | | | |
+| Animated.not(a) | formula\`!${a}\` | | | | |
 
 
 

@@ -72,7 +72,9 @@ const parse = (tokens: Token[], variables: Variables) => {
 	while (ops.length > 0) {
 		addOperatorNode(nodes, ops.pop() as Token);
 	}
-
+	if (nodes.length > 1) {
+		throw new TypeError('Could not parse expression');
+	}
 	return nodes.pop() as ASTNode;
 };
 

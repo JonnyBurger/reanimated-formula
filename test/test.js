@@ -249,4 +249,15 @@ test('Should support set()', t => {
 	t.is(formula`set(${new Animated.Value(0)}, 1)`, 1);
 });
 
+test('Should parse complicated formula correctly', t => {
+	const x = new Animated.Value(0);
+	const thresholdRight = new Animated.Value(0);
+	const canGoRight = new Animated.Value(0);
+	const isTransitioningRight = new Animated.Value(0);
+	t.notThrows(
+		() =>
+			formula`(${x} >= ${thresholdRight} && ${canGoRight}) ? set(${isTransitioningRight}, 1) : 0`
+	);
+});
+
 test.todo('Should support color');

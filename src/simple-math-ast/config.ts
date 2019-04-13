@@ -20,7 +20,7 @@ const config: {rules: RuleWrapper[]} = {
 			data: {
 				type: TokenType.NAMED_FUNCTION,
 				args: 1,
-				precedence: 4
+				precedence: 5
 			}
 		},
 		{
@@ -128,11 +128,11 @@ const config: {rules: RuleWrapper[]} = {
 		{key: '[(\\[]', data: {type: TokenType.LEFT_PARENTHESIS}},
 		{
 			key: '\\?',
-			data: {type: TokenType.OPERATOR, args: 2, precedence: 5}
+			data: {type: TokenType.OPERATOR, args: 2, precedence: 3}
 		},
 		{
 			key: '\\:',
-			data: {type: TokenType.OPERATOR, args: 2, precedence: 6}
+			data: {type: TokenType.OPERATOR, args: 2, precedence: 4}
 		},
 		{key: '[)\\]]', data: {type: TokenType.RIGHT_PARENTHESIS}},
 		{key: '[0-9.,]+', data: {type: TokenType.NUMBER}},

@@ -118,7 +118,15 @@ const config: {rules: RuleWrapper[]} = {
 			}
 		},
 		{
-			key: '[\\+\\-\\,]',
+			key: '[\\+\\,]',
+			data: {
+				type: TokenType.OPERATOR,
+				args: 2,
+				precedence: 1
+			}
+		},
+		{
+			key: '\\-(?![0-9.,])',
 			data: {
 				type: TokenType.OPERATOR,
 				args: 2,
@@ -128,14 +136,14 @@ const config: {rules: RuleWrapper[]} = {
 		{key: '[(\\[]', data: {type: TokenType.LEFT_PARENTHESIS}},
 		{
 			key: '\\?',
-			data: {type: TokenType.OPERATOR, args: 2, precedence: 3}
+			data: {type: TokenType.OPERATOR, args: 2, precedence: -1}
 		},
 		{
 			key: '\\:',
-			data: {type: TokenType.OPERATOR, args: 2, precedence: 4}
+			data: {type: TokenType.OPERATOR, args: 2, precedence: 0}
 		},
 		{key: '[)\\]]', data: {type: TokenType.RIGHT_PARENTHESIS}},
-		{key: '[0-9.,]+', data: {type: TokenType.NUMBER}},
+		{key: '[0-9.,-]+', data: {type: TokenType.NUMBER}},
 		{key: '[a-zA-Z]+', data: {type: TokenType.VARIABLE}}
 	]
 };

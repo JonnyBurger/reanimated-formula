@@ -260,4 +260,14 @@ test('Should parse complicated formula correctly', t => {
 	);
 });
 
+test('Get precedence right', t => {
+	const a = new Animated.Value(0);
+	const result = formula`${a} === 0 ? 10 : 3`;
+	t.is(result.__value, 10);
+});
+
+test('Should support negative numbers', t => {
+	t.is(formula`-1 - 1`.__value, -2);
+});
+
 test.todo('Should support color');

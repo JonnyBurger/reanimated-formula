@@ -39,6 +39,7 @@
 | Animated.cond(a, b) | formula\`${a} ? ${b} : 0\` | | | | |
 | Animated.cond(a, b, c) | formula\`${a} ? ${b} : ${c}\` | | | | |
 | Animated.concat(a, 'deg') | formula\`deg(${a})\` | | | | |
+| Animated.set(a, b) | formula\`set(${a}, ${b})\` | | | | |
 
 
 

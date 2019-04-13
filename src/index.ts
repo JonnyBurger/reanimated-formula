@@ -72,7 +72,7 @@ export const nativeFormula = (
 	return result;
 };
 
-const reanimatedFormula = (
+const formula = (
 	args: TemplateStringsArray,
 	...placeholders: Placeholder[]
 ) => {
@@ -100,4 +100,4 @@ const reanimatedFormula = (
 	}
 };
 
-export default reanimatedFormula;
+export default formula;

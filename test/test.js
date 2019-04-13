@@ -245,4 +245,8 @@ test('Should support deg()', t => {
 	t.is(formula`deg(20)`, '20deg');
 });
 
+test('Should support set()', t => {
+	t.is(formula`set(${new Animated.Value(0)}, 1)`, 1);
+});
+
 test.todo('Should support color');

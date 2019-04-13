@@ -257,6 +257,18 @@ const reduceAst = (
 			}
 			return Math.max(...(left as number[]));
 		}
+		if (tree.token.value === 'set') {
+			if (!Array.isArray(left) || left.length !== 2) {
+				throw new InvalidExpressionError(
+					`${logPrefix} Must pass multiple two values to set()`
+				);
+			}
+			if (mathType === 'reanimated') {
+				// @ts-ignore
+				return Animated.set(left[0], left[1]);
+			}
+			return left[1];
+		}
 		if (tree.token.value === 'pow') {
 			if (!Array.isArray(left) || left.length < 2) {
 				throw new InvalidExpressionError(

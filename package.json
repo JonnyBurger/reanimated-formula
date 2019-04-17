@@ -1,11 +1,12 @@
 {
   "name": "reanimated-formula",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.1",
   "description": "",
   "main": "dist/commonjs/index.js",
   "module": "dist/module/index.js",
   "react-native": "dist/module/index.js",
   "types": "dist/typescript/index.d.ts",
+  "repository": "JonnyBurger/reanimated-formula",
   "scripts": {
     "prepare": "npx npm-install-peers && bob build",
     "test": "tsc && ava test"

@@ -22,6 +22,10 @@ npm install reanimated-formula
 import Animated from 'react-native-reanimated'
 import formula from 'reanimated-formula'
 
+const active = new Animated.Value(0)
+const offsetY = new Animated.Value(0)
+const swipeProgress = new Animated.Value(0)
+
 const Animation = () => (
     <Animated.View
         style={{

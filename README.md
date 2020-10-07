@@ -1,3 +1,5 @@
+>  ⚠️ *Deprecated*: Reanimated 2 ships with a much nicer solution, out of the box. This makes this library only useful for Reanimated 1 code and therefore no time will be invested into it's future development.
+
 # reanimated-formula
 
 <p align="center">
